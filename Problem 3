@@ -12,3 +12,7 @@ plt.scatter(mean_rating_1.F, mean_rating_1.M)
 
 #correlation cofficient
 print mean_rating.corr()
+
+#* Conjecture under what circumstances the rating given by one gender can be used to predict the rating given by the other gender.
+ #   * For example, are men and women more similar when they are younger or older?
+  #  * Be sure to come up with your own conjectures and support them with data!
