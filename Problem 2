@@ -1,0 +1,21 @@
+#histogram of all ratings: 
+data['rating'].hist(bins=5);
+
+#histogram of number of ratings each received
+data.title.value_counts().hist(bins=15);
+
+#same as above but want a clearer picture, so restrict
+
+#hist of average ratings
+mean_ratings.hist(bins=10);
+
+#hist of average rating for movies rated over 100 times
+ratings_by_title = data.groupby('title').size()
+dat100 = ratings_by_title.index[ratings_by_title >= 100]
+mean_ratings[dat100].hist(bins=10)
+
+#tails go away, we would trust these ratings more (bigger sample size)
+
+#* Make some conjectures about the distribution of ratings? Support your answers with data!  
+#*  For example, what age range do you think has more extreme ratings?  Do you think children are more or less likely to rate a movie 1 or 5?
+#*  Be sure to come up with your own conjectures and support them with data!
