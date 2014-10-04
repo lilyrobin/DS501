@@ -10,3 +10,5 @@ dat200 = ratings_by_title.index[ratings_by_title >= 200]
 mean_rating_1 = mean_rating.ix[dat200]
 plt.scatter(mean_rating_1.F, mean_rating_1.M)
 
+#correlation cofficient
+print mean_rating.corr()
