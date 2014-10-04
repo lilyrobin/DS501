@@ -3,3 +3,10 @@
 #scatter plot of men vs women, mean rating
 #mean_rating = data.pivot_table('rating', rows='title',cols='gender', aggfunc='mean')
 plt.scatter(mean_rating.F, mean_rating.M)
+
+
+#men vs women average rating, ratings count>200
+dat200 = ratings_by_title.index[ratings_by_title >= 200]
+mean_rating_1 = mean_rating.ix[dat200]
+plt.scatter(mean_rating_1.F, mean_rating_1.M)
+
