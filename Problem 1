@@ -66,12 +66,47 @@ high_pop=mean_ratings[most_rated2]
 high_pop.sort(ascending=False)
 print high_pop[:10]
 
-#Conjectures: which is the most popular movie styple among middle aged people(40-60)? I guess Dramma
+#conjecture: look at most popular genres among different age groups 
 
+#most popular genre
+e=data.groupby('genres').size()
+e.sort(ascending=False)
+print e
+#most rated is comedy
+
+#Conjectures: which is the most common movie style among middle aged people(40-60)? I guess Drama
+print "\n most popular genre among middle aged:"
 middle_age_data=data[(data.age>=40)&(data.age<=60)]
 a=middle_age_data.groupby('genres').size()
 a.sort(ascending=False)
-a[:10]
+print a[:10]
+#yes, drama. 
 
-#the result shows that Dramma has been rated 26230 times among middle aged people which can prove my conjectures
+#kids
+print "\n most common genre among kids:"
+kids=data[(data.age<=12)]
+f=kids.groupby('genres').size()
+f.sort(ascending=False)
+print f[:10]
+
+#teens
+print "\n most common genre among teens:"
+teens=data[(data.age>=13)&(data.age<=19)]
+b=teens.groupby('genres').size()
+b.sort(ascending=False)
+print b[:10]
+
+#younger adults
+print "\n most common genre among adults:"
+adults=data[(data.age>=20)&(data.age<=39)]
+c=middle_age_data.groupby('genres').size()
+c.sort(ascending=False)
+print c[:10]
+
+#older adults
+print "\n most common genre among elderly:"
+old=data[(data.age>=61)]
+g=old.groupby('genres').size()
+g.sort(ascending=False)
+print g[:10]
 
