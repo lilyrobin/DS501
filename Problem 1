@@ -60,12 +60,11 @@ ratings_by_title.sort(ascending=False)
 
 #these are the movies with the highest number of ratings. but are they rated high? let's say among the top 100 movies by rating, the most popular are the 10 with the highest average rating
 
-most_rated = ratings_by_title[:100]
-most_rated = ratings_by_title.index
-high_pop=mean_ratings[most_rated]
+most_rated2 = ratings_by_title.head(n=100)
+most_rated2 = most_rated2.index
+high_pop=mean_ratings[most_rated2]
 high_pop.sort(ascending=False)
 print high_pop[:10]
-#comes up with movies we wouldn't think of...hmmm...
 
 #Conjectures: which is the most popular movie styple among middle aged people(40-60)? I guess Dramma
 
