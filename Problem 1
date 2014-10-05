@@ -19,6 +19,10 @@ movies = pd.read_table('/Users/Stefan/Downloads/ml-1m/movies.dat', sep='::', hea
 #merge those 3 tables into one complete table
 data= pd.merge(pd.merge(ratings,users),movies)
 
+#store Data into HDF5 file
+store=pd.HDFStore('data.h5')
+data.to_hdf('data.h5','table',append=True)
+
 #How many movies have an average rating over 4.5 overall?
 mean_ratings =data.pivot_table('rating',rows='title',aggfunc='mean')
 for i in range(3706):
