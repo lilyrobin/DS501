@@ -15,4 +15,34 @@ print mean_rating.corr()
 
 #* Conjecture under what circumstances the rating given by one gender can be used to predict the rating given by the other gender.
  #   * For example, are men and women more similar when they are younger or older?
-  #  * Be sure to come up with your own conjectures and support them with data!
+    
+#idea one: genders similarity by age bracket
+
+#kids
+print ("\n kids")
+mean_rating_kids =kids.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+plt.scatter(mean_rating_kids.F, mean_rating_kids.M)
+print mean_rating_kids.corr()
+
+print ("\n teens")
+mean_rating_teens =teens.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_teens.F, mean_rating_teens.M)
+print mean_rating_teens.corr()
+
+print ("\n adults")
+mean_rating_adult =adults.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_adult.F, mean_rating_adult.M)
+print mean_rating_adult.corr()
+
+print ("\n middle age")
+mean_rating_middle =middle_age_data.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
+print mean_rating_middle.corr()
+
+#print ("\n elderly")
+#mean_rating_old =old.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_old.F, mean_rating_old.M)
+#print mean_rating_old.corr()
+
+
+#idea two: 
