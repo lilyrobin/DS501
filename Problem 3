@@ -46,3 +46,24 @@ print mean_rating_middle.corr()
 
 
 #idea two: 
+
+#more exploration of men vs women
+#would be hardest to predict for movies with the greatest difference between them
+#so what has the greatest difference between them?
+
+#inspiration from http://www.gregreda.com/2013/10/26/using-pandas-on-the-movielens-dataset/
+
+most_50 = data.groupby('movie_id').size().order(ascending=False)[:50]
+pivoted = data.pivot_table(rows=['movie_id', 'title'],
+                           cols=['gender'],
+                           values='rating',
+                           fill_value=0)
+#print pivoted.head()
+pivoted['diff'] = pivoted.M - pivoted.F
+pivoted.reset_index('movie_id', inplace=True)
+
+disagreements = pivoted[pivoted.movie_id.isin(most_50.index)]['diff']
+disagreements.order().plot(kind='barh', figsize=[9, 15])
+plt.title('Male vs. Female Avg. Ratings\n(Difference > 0 = Favored by Men)')
+plt.ylabel('Title')
+plt.xlabel('Average Rating Difference');
