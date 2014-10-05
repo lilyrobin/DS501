@@ -75,7 +75,7 @@ print high_pop[:10]
 #most popular genre
 e=data.groupby('genres').size()
 e.sort(ascending=False)
-print e
+#print e
 #most rated is comedy
 
 #Conjectures: which is the most common movie style among middle aged people(40-60)? I guess Drama
@@ -86,31 +86,67 @@ a.sort(ascending=False)
 print a[:10]
 #yes, drama. 
 
+#check all age blocks of 10 years
 #kids
 print "\n most common genre among kids:"
-kids=data[(data.age<=12)]
+kids=data[(data.age<=9)]
 f=kids.groupby('genres').size()
 f.sort(ascending=False)
 print f[:10]
 
 #teens
 print "\n most common genre among teens:"
-teens=data[(data.age>=13)&(data.age<=19)]
+teens=data[(data.age>=10)&(data.age<=19)]
 b=teens.groupby('genres').size()
 b.sort(ascending=False)
 print b[:10]
 
-#younger adults
-print "\n most common genre among adults:"
-adults=data[(data.age>=20)&(data.age<=39)]
+#20's
+print "\n most common genre among 20's:"
+adults=data[(data.age>=20)&(data.age<=29)]
 c=middle_age_data.groupby('genres').size()
 c.sort(ascending=False)
 print c[:10]
 
-#older adults
-print "\n most common genre among elderly:"
-old=data[(data.age>=61)]
+#30's
+print "\n most common genre among 30's:"
+old=data[(data.age>=30)&(data.age<=39)]
 g=old.groupby('genres').size()
 g.sort(ascending=False)
 print g[:10]
 
+#40's
+print "\n most common genre among 40's:"
+old=data[(data.age>=40)&(data.age<=49)]
+g=old.groupby('genres').size()
+g.sort(ascending=False)
+print g[:10]
+
+#50's
+print "\n most common genre among 50's:"
+old=data[(data.age>=50)&(data.age<=59)]
+g=old.groupby('genres').size()
+g.sort(ascending=False)
+print g[:10]
+
+#60's
+print "\n most common genre among 60's:"
+old=data[(data.age>=60)&(data.age<=69)]
+g=old.groupby('genres').size()
+g.sort(ascending=False)
+print g[:10]
+
+#70's
+print "\n most common genre among 70's:"
+old=data[(data.age>=70)&(data.age<=79)]
+g=old.groupby('genres').size()
+g.sort(ascending=False)
+print g[:10]
+
+
+#older adults
+#print "\n most common genre among elderly:"
+#old=data[(data.age>=61)]
+#g=old.groupby('genres').size()
+#g.sort(ascending=False)
+#print g[:10]
