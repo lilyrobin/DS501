@@ -53,9 +53,19 @@ for i in range(3706):
         
 #What are ten most popular movies? we gonna count the number of rating by users because the more rating times there are,
 #the more concentration the movie has which can serve to prove this movie is very popular
+print "\n most rated:"
 ratings_by_title = data.groupby('title').size()
 ratings_by_title.sort(ascending=False)
-ratings_by_title[:10]
+#print ratings_by_title[:10]
+
+#these are the movies with the highest number of ratings. but are they rated high? let's say among the top 100 movies by rating, the most popular are the 10 with the highest average rating
+
+most_rated = ratings_by_title[:100]
+most_rated = ratings_by_title.index
+high_pop=mean_ratings[most_rated]
+high_pop.sort(ascending=False)
+print high_pop[:10]
+#comes up with movies we wouldn't think of...hmmm...
 
 #Conjectures: which is the most popular movie styple among middle aged people(40-60)? I guess Dramma
 
