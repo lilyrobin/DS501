@@ -48,7 +48,7 @@ for i in range(3706):
 women_data=data[(data.gender=='F')&(data.age>=30)]
 women =data.pivot_table('rating',rows='title',aggfunc='median')
 for i in range(3706):
-    if(men[i]>=4.5):
+    if(women[i]>=4.5):
         print women.index[i]+' '+str(women[i])
         
 #What are ten most popular movies? we gonna count the number of rating by users because the more rating times there are,
