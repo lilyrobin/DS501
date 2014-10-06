@@ -19,3 +19,10 @@ mean_ratings[dat100].hist(bins=50)
 #* Make some conjectures about the distribution of ratings? Support your answers with data!  
 #*  For example, what age range do you think has more extreme ratings?  Do you think children are more or less likely to rate a movie 1 or 5?
 #*  Be sure to come up with your own conjectures and support them with data!
+
+#histogram of each age range ratings-need to repeat for all ranges
+kids=data[(data.age<=9)]
+kids['rating'].hist(bins=5);
+
+teens=data[(data.age>=10)&(data.age<=19)]
+teens['rating'].hist(bins=5);
