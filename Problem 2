@@ -2,17 +2,17 @@
 data['rating'].hist(bins=5);
 
 #histogram of number of ratings each received
-data.title.value_counts().hist(bins=15);
+data.title.value_counts().hist(bins=40);
 
 #same as above but want a clearer picture, so restrict
 
 #hist of average ratings
-mean_ratings.hist(bins=10);
+mean_ratings.hist(bins=50);
 
 #hist of average rating for movies rated over 100 times
 ratings_by_title = data.groupby('title').size()
 dat100 = ratings_by_title.index[ratings_by_title >= 100]
-mean_ratings[dat100].hist(bins=10)
+mean_ratings[dat100].hist(bins=50)
 
 #tails go away, we would trust these ratings more (bigger sample size)
 
