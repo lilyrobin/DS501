@@ -1,0 +1,31 @@
+# How many movies have an average rating over 4.5 overall?
+
+# Calculate the mean rating of each movie
+meandf= data.groupby(['title'], as_index=False).aggregate({'rating':np.mean})
+ratingdf = meandf[meandf['rating']>4.5]
+print "\n Movies with average rating over 4.5"  
+print ratingdf.sort(['rating'], ascending=[0])
+
+# How many movies have an average rating over 4.5 among men? How about women?
+
+meandf= data.groupby(['title','gender'], as_index=False).aggregate({'rating':np.mean})
+#Men
+ratingMendf = meandf[(meandf['rating']>4.5)&(meandf['gender']=='M')]
+print "\n Movies with average rating over 4.5 rated by Men" 
+print ratingMendf.sort(['rating'], ascending=[0])
+#Women
+ratingWomendf = meandf[(meandf['rating']>4.5)&(meandf['gender']=='F')]
+print "\n Movies with average rating over 4.5 rated by Women" 
+print ratingWomendf.sort(['rating'], ascending=[0])
+
+# How many movies have an median rating over 4.5 among men over age 30? How about women over age 30?
+
+mediandf= data.groupby(['title','gender','age'], as_index=False).aggregate({'rating':np.median})
+#Men
+ratingMendf = mediandf[(mediandf['rating']>4.5)&(mediandf['gender']=='M')&(mediandf['age']>30)]
+print "\n Movies with median rating over 4.5 rated by Men" 
+print ratingMendf.sort(['rating'], ascending=[0])
+#Women
+ratingWomendf = mediandf[(mediandf['rating']>4.5)&(mediandf['gender']=='F')&(mediandf['age']>30)]
+print "\n Movies with median rating over 4.5 rated by Women" 
+print ratingWomendf.sort(['rating'], ascending=[0])
