@@ -129,21 +129,6 @@ g=old.groupby('genres').size()
 g.sort(ascending=False)
 print g[:10]
 
-#60's
-print "\n most common genre among 60's:"
-old=data[(data.age>=60)&(data.age<=69)]
-g=old.groupby('genres').size()
-g.sort(ascending=False)
-print g[:10]
-
-#70's
-print "\n most common genre among 70's:"
-old=data[(data.age>=70)&(data.age<=79)]
-g=old.groupby('genres').size()
-g.sort(ascending=False)
-print g[:10]
-
-
 #older adults
 #print "\n most common genre among elderly:"
 #old=data[(data.age>=61)]
