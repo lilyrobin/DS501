@@ -1,0 +1,6 @@
+#where are our most active users? look at zip code
+
+#print data.head(10)
+x=data.pivot_table('rating', rows='zip', aggfunc='count')
+y=x
+y.order(ascending=False).head(10) #most active zip codes, want to market to these people (note does NOT control for population in that zip code)
