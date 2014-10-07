@@ -28,3 +28,21 @@ kids['rating'].hist(bins=5);
 
 teens=data[(data.age>=10)&(data.age<=19)]
 teens['rating'].hist(bins=5);
+
+#variance within each gender, age range
+
+#gender-basically the same
+rating_std_by_gender = data.groupby('gender')['rating'].std()
+#print rating_std_by_gender
+
+#by age
+
+labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
+
+dat=data
+dat['age_group'] = pd.cut(dat.age, range(0, 81, 10), right=False, labels=labels)
+#print dat[['age', 'age_group']].drop_duplicates()[:10]
+
+#age group-more variance in kids, standard deviation gets smaller as older
+rating_std_by_age = data.groupby('age_group')['rating'].std()
+print rating_std_by_age
