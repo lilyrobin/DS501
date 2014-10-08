@@ -36,6 +36,9 @@ rating_std_by_gender = data.groupby('gender')['rating'].std()
 #print rating_std_by_gender
 
 #by age
+#conjecture: ratings stabalize as groups age. Movies are so gender oriented for kids (princesses vs gi joe types) but as they age, 
+#movies are made the please the whole audience. yes there are still action films vs chick flicks, but in general, the movies 
+#the everyone sees, like big dramas, are meant to appeal to everyone. So we'd expect less variance as the age groups get older
 
 labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
 
