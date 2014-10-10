@@ -90,52 +90,56 @@ a.sort(ascending=False)
 print a[:10]
 #yes, drama. 
 
+labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
+dat=data
+dat['age_group'] = pd.cut(dat.age, range(0, 81, 10), right=False, labels=labels)
+
 #check all age blocks of 10 years
 #kids
 print "\n most common genre among kids:"
-kids=data[(data.age<=9)]
+kids=data[(data.age_group=='0-9')]
 f=kids.groupby('genres').size()
 f.sort(ascending=False)
 print f[:10]
 
 #teens
 print "\n most common genre among teens:"
-teens=data[(data.age>=10)&(data.age<=19)]
+teens=data[(data.age_group=='10-19')]
 b=teens.groupby('genres').size()
 b.sort(ascending=False)
 print b[:10]
 
 #20's
 print "\n most common genre among 20's:"
-adults=data[(data.age>=20)&(data.age<=29)]
-c=middle_age_data.groupby('genres').size()
+a20=data[(data.age_group=='20-29')]
+c=a20.groupby('genres').size()
 c.sort(ascending=False)
 print c[:10]
 
 #30's
 print "\n most common genre among 30's:"
-old=data[(data.age>=30)&(data.age<=39)]
-g=old.groupby('genres').size()
+a30=data[(data.age_group=='30-39')]
+g=a30.groupby('genres').size()
 g.sort(ascending=False)
 print g[:10]
 
 #40's
 print "\n most common genre among 40's:"
-old=data[(data.age>=40)&(data.age<=49)]
-g=old.groupby('genres').size()
+a40=data[(data.age_group=='40-49')]
+g=a40.groupby('genres').size()
 g.sort(ascending=False)
 print g[:10]
 
 #50's
 print "\n most common genre among 50's:"
-old=data[(data.age>=50)&(data.age<=59)]
-g=old.groupby('genres').size()
+a50=data[(data.age_group=='50-59')]
+g=a50.groupby('genres').size()
 g.sort(ascending=False)
 print g[:10]
 
-#older adults
-#print "\n most common genre among elderly:"
-#old=data[(data.age>=61)]
+#60's-no one this old
+#print "\n most common genre among 60's:"
+#old=data[(data.age>=60)&(data.age<=69)]
 #g=old.groupby('genres').size()
 #g.sort(ascending=False)
 #print g[:10]
