@@ -1,18 +1,26 @@
-#histogram of all ratings: 
+#histogram of all ratings:
 data['rating'].hist(bins=5);
+plt.xlabel('Rating')
+plt.ylabel('Count')
 
 #histogram of number of ratings each received
 data.title.value_counts().hist(bins=40);
+plt.xlabel('Total Ratings')
+plt.ylabel('Count')
 
 #same as above but want a clearer picture, so restrict
 
 #hist of average ratings
-mean_ratings.hist(bins=50);
+mean_ratings.hist(bins=20);
+plt.xlabel('Average Rating')
+plt.ylabel('Count')
 
 #hist of average rating for movies rated over 100 times
 ratings_by_title = data.groupby('title').size()
 dat100 = ratings_by_title.index[ratings_by_title >= 100]
-mean_ratings[dat100].hist(bins=50)
+mean_ratings[dat100].hist(bins=20)
+plt.xlabel('Average Rating, Movies Rated 100+ times')
+plt.ylabel('Count')
 
 #tails go away, we would trust these ratings more (bigger sample size)
 
