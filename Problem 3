@@ -29,36 +29,43 @@ print mean_rating.corr()
 
 #* Conjecture under what circumstances the rating given by one gender can be used to predict the rating given by the other gender.
  #   * For example, are men and women more similar when they are younger or older?
- 
-#idea one: genders similarity by age bracket
 
 #kids
-#r = 0.3478, 0.3<|r|>0.5 which is low correlation. 
 print ("\n kids")
 mean_rating_kids =kids.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 plt.scatter(mean_rating_kids.F, mean_rating_kids.M)
-print mean_rating_kids.corr()
+c1=mean_rating_kids.corr()[:1]
+print c1
 
-#teenager
-#r= 0.5756, 0.5<|r|>0.8, which is moderate correlation.
 print ("\n teens")
 mean_rating_teens =teens.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
-plt.scatter(mean_rating_teens.F, mean_rating_teens.M,c=mean_rating_teens.F)
-print mean_rating_teens.corr()
+#plt.scatter(mean_rating_teens.F, mean_rating_teens.M)
+c2=mean_rating_teens.corr()[:1]
+print c2
 
-#adult
-#r=0.6862,0.5<|r|>0.8, which is moderate correlation.
-print ("\n adults")
-mean_rating_adult =adults.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
-plt.scatter(mean_rating_adult.F, mean_rating_adult.M,c=mean_rating_adult.F)
-print mean_rating_adult.corr()
+print ("\n 20-29 adults")
+mean_rating_adult =a20.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_adult.F, mean_rating_adult.M)
+c3= mean_rating_adult.corr()[:1]
+print c3
 
-#middle age
-#r= 0.6538,0.5<|r|>0.8, which is also moderate correlation.
-print ("\n middle age")
-mean_rating_middle =middle_age_data.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
-plt.scatter(mean_rating_middle.F, mean_rating_middle.M,c=mean_rating_middle.F)
-print mean_rating_middle.corr()
+print ("\n 30-39 adults")
+mean_rating_middle =a30.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
+c4=mean_rating_middle.corr()[:1]
+print c4
+
+print ("\n 40-49 adults")
+mean_rating_middle =a40.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
+c5=mean_rating_middle.corr()[:1]
+print c5
+
+print ("\n 50-59 adults")
+mean_rating_middle =a50.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
+c6=mean_rating_middle.corr()[:1]
+print c6
 
 #Q:Are men and women more similar when they are younger or older
 #Analysis:firstly, we have to mention correlation coefficient r. The bigger r is, the degree of correlation is higher
