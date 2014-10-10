@@ -7,7 +7,9 @@
 #the scatter plot, we can argue that there is a linear corelation between men's rating and women's rating.
 
 mean_rating = data.pivot_table('rating', rows='title',cols='gender', aggfunc='mean')
-plt.scatter(mean_rating.M,mean_rating.F,c=mean_rating.F)
+plt.scatter(mean_rating.M,mean_rating.F)
+plt.xlabel('Average Rating, Men')
+plt.ylabel('Average Rating, Women')
 
 
 #men vs women average rating, ratings count>200
@@ -15,7 +17,9 @@ plt.scatter(mean_rating.M,mean_rating.F,c=mean_rating.F)
 #women's average rating. 
 dat200 = ratings_by_title.index[ratings_by_title >= 200]
 mean_rating_1 = mean_rating.ix[dat200]
-plt.scatter(mean_rating_1.F, mean_rating_1.M,c=mean_rating_1.F)
+plt.scatter(mean_rating_1.M, mean_rating_1.F)
+plt.xlabel('Average Rating, Men')
+plt.ylabel('Average Rating, Women')
 
 #correlation cofficient between men and women is 0.76319
 #correlation cofficient r, its range from -1 to 1, if abs(r) is larger or near 1, the degree of linear correlation
