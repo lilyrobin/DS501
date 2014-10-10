@@ -31,11 +31,12 @@ plt.ylabel('Count')
 #look at age, gender specific histograms 
 
 #histogram of each age range ratings-need to repeat for all ranges
-kids=data[(data.age<=9)]
 kids['rating'].hist(bins=5);
-
-teens=data[(data.age>=10)&(data.age<=19)]
-teens['rating'].hist(bins=5);
+teens['rating'].hist(bins=5)
+a20['rating'].hist(bins=5)
+a30['rating'].hist(bins=5)
+a40['rating'].hist(bins=5)
+a50['rating'].hist(bins=5)
 
 #variance within each gender, age range
 
@@ -48,7 +49,8 @@ rating_std_by_gender = data.groupby('gender')['rating'].std()
 #movies are made the please the whole audience. yes there are still action films vs chick flicks, but in general, the movies 
 #the everyone sees, like big dramas, are meant to appeal to everyone. So we'd expect less variance as the age groups get older
 
-labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
+#in problem 1
+#labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
 
 dat=data
 dat['age_group'] = pd.cut(dat.age, range(0, 81, 10), right=False, labels=labels)
