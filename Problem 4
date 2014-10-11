@@ -1,3 +1,20 @@
+#Do any of your conjectures in Problems 1, 2, and 3 provide insights that a movie company might be interested in?
+#A: 
+
+
+#Propose a business question that you think this data can answer?
+#How the company can efficiently recommend people movies?
+
+#A: Now there exist an hot issue that how a movie company can efficient recommend people movies. Although it sounds easy
+#to be solved with the help of data, how to effiently do a recommendation is very complicated. From the marketing 
+#perspective, there are a few questions below need to be answered.
+#1. How to recommend people at different age movies? what kinds of movies are popular in different age groups?
+#In order to answer the first question, we will look at the data which shows us the popular genre of movie among different
+age groups. From the data we collected in Problem 1, we can definitely know that Comedy is very popular among kids and
+teenagers. For people whose age is between 20-40, Comedy and Dramma are both welcomed. When people is older than 40, they
+prefer to focusing on Dramma. To improve our analysis, I think we can divide people into more groups so that we can better
+predict people's preference of movie geners. In addition, we already know dramma and comedy are poplar in people's view.
+Now we start to deeply analyze top 10 movies in dramma and commedy. with the help of the data ....
 #where are our most active users? look at zip code
 
 #print data.head(10)
