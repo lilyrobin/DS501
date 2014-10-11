@@ -33,6 +33,8 @@ print "\n Movies with average rating over 4.5"
 print len(ratingdf.sort(['rating'], ascending=[0]))
 print ratingdf.sort(['rating'], ascending=[0])
 
+mean_ratings =data.pivot_table('rating',rows='title',aggfunc='mean')
+
 # How many movies have an average rating over 4.5 among men? How about women?
 # Group by Title, Gender
 mean_ratings= data.pivot_table('rating', rows='title', cols='gender', aggfunc='mean')
