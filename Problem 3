@@ -29,6 +29,8 @@ print mean_rating.corr()
 
 #* Conjecture under what circumstances the rating given by one gender can be used to predict the rating given by the other gender.
  #   * For example, are men and women more similar when they are younger or older?
+    
+#idea one: genders are more similar when they are young (kids) and older (40+), and differ most in between
 
 #kids
 print ("\n kids")
@@ -37,36 +39,41 @@ plt.scatter(mean_rating_kids.F, mean_rating_kids.M)
 c1=mean_rating_kids.corr()[:1]
 print c1
 
-print ("\n teens")
+print ("\n 18-24")
 mean_rating_teens =teens.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 #plt.scatter(mean_rating_teens.F, mean_rating_teens.M)
 c2=mean_rating_teens.corr()[:1]
 print c2
 
-print ("\n 20-29 adults")
+print ("\n 25-234")
 mean_rating_adult =a20.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 #plt.scatter(mean_rating_adult.F, mean_rating_adult.M)
 c3= mean_rating_adult.corr()[:1]
 print c3
 
-print ("\n 30-39 adults")
+print ("\n 35-44")
 mean_rating_middle =a30.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 #plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
 c4=mean_rating_middle.corr()[:1]
 print c4
 
-print ("\n 40-49 adults")
+print ("\n 45-49")
 mean_rating_middle =a40.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 #plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
 c5=mean_rating_middle.corr()[:1]
 print c5
 
-print ("\n 50-59 adults")
+print ("\n 50-55 adults")
 mean_rating_middle =a50.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
 #plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
 c6=mean_rating_middle.corr()[:1]
 print c6
 
+print ("\n 56+ adults")
+mean_rating_middle =old.pivot_table('rating',rows='title',cols='gender',aggfunc='mean')
+#plt.scatter(mean_rating_middle.F, mean_rating_middle.M)
+c8=mean_rating_middle.corr()[:1]
+print c8
 #Q:Are men and women more similar when they are younger or older
 #Analysis:firstly, we have to mention correlation coefficient r. The bigger r is, the degree of correlation is higher
 which means in this situation people tend to do similar thing like similar rating. Unfortunately, what had happened
