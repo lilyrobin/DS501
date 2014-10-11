@@ -1,78 +1,123 @@
 import pandas as pd
+import numpy as np
 
+# Downloaded the 1 million ratings MovieLens data set and saved the files in C:/iPython/ 
+# Merge all of the data[ratings, users, movies] into a single Pandas DataFrame
 
-# build a Dataframe of users'information and display it in table format
+# Users information from Users.dat file
 unames = ['user_id', 'gender', 'age', 'occupation', 'zip'] 
-users = pd.read_table('/Users/Stefan/Downloads/ml-1m/users.dat', sep='::', header=None,names=unames)
+users = pd.read_table('C:/iPython/users.dat', sep='::', header=None,
+                      names=unames)
 
-#create a Dataframe of ratings'information and display it in table format
+# Rating information from Ratings.dat file
 rnames = ['user_id', 'movie_id', 'rating', 'timestamp']
-ratings = pd.read_table('/Users/Stefan/Downloads/ml-1m/ratings.dat', sep='::', header=None,names=rnames)
+ratings = pd.read_table('C:/iPython/ratings.dat', sep='::', header=None,
+                        names=rnames)
 
-#create a Dataframe of movies'information and display it in table format
+# Movies information from Movies.dat file
 mnames = ['movie_id', 'title', 'genres']
-movies = pd.read_table('/Users/Stefan/Downloads/ml-1m/movies.dat', sep='::', header=None,names=mnames)
+movies = pd.read_table('C:/iPython/movies.dat', sep='::', header=None,
+                        names=mnames)
 
-#merge those 3 tables into one complete table
-data= pd.merge(pd.merge(ratings,users),movies)
+# We first merge ratings with users then merging that result with the movies data. 
+data = pd.merge(pd.merge(ratings, users), movies)
 
-#store Data into HDF5 file
-store=pd.HDFStore('data.h5')
-data.to_hdf('data.h5','table',append=True)
+#print data.ix[0]
 
-#How many movies have an average rating over 4.5 overall?
-mean_ratings =data.pivot_table('rating',rows='title',aggfunc='mean')
-for i in range(3706):
-    if(mean_ratings[i]>4.5):
-        print mean_ratings.index[i]+' '+str(mean_ratings[i])
-
-# How many movies have an average rating over 4.5 overall?
-
-# Calculate the mean rating of each movie
-meandf= data.groupby(['title'], as_index=False).aggregate({'rating':np.mean})
-ratingdf = meandf[meandf['rating']>4.5]
-print "\n Movies with average rating over 4.5"
-print ratingdf.sort(['rating'], ascending=[0])
+# Store the data into an HDF5[hierarchical data format] file
+store = pd.HDFStore('data.h5')
 
 # How many movies have an average rating over 4.5 among men? How about women?
-meandf= data.groupby(['title','gender'], as_index=False).aggregate({'rating':np.mean})
+# Group by Title, Gender
+mean_ratings= data.pivot_table('rating', rows='title', cols='gender', aggfunc='mean')
+# Get Top film among male viewers by filtering the avg rating value > 4.5
+top_male_ratings = mean_ratings[(mean_ratings.M>4.5)].sort_index(by='M', ascending=False)
 
-#Men
-ratingMendf = meandf[(meandf['rating']>4.5)&(meandf['gender']=='M')]
-print "\n Movies with average rating over 4.5 rated by Men"
-print ratingMendf.sort(['rating'], ascending=[0])
+print "\n Number of movies with average rating over 4.5 among men are " + str(len(top_male_ratings.index))
+top_male_ratings
 
-#Women
-ratingWomendf = meandf[(meandf['rating']>4.5)&(meandf['gender']=='F')]
-print "\n Movies with average rating over 4.5 rated by Women"
-print ratingWomendf.sort(['rating'], ascending=[0])
-# How many movies have an median rating over 4.5 among men over age 30? How about women over age 30?
-mediandf= data.groupby(['title','gender','age'], as_index=False).aggregate({'rating':np.median})
+# How many movies have an average rating over 4.5 among women?
+# Get Top film among female viewers by filtering the avg rating value > 4.
+top_female_ratings = mean_ratings[(mean_ratings.F>4.5)].sort_index(by='F', ascending=False)
+print "\n Number of movies with average rating over 4.5 among women are " + str(len(top_female_ratings.index))
+top_female_ratings
 
-#Men
-ratingMendf = mediandf[(mediandf['rating']>4.5)&(mediandf['gender']=='M')&(mediandf['age']>30)]
-print "\n Movies with median rating over 4.5 rated by Men"
-print ratingMendf.sort(['rating'], ascending=[0])
+# How many movies have an median rating over 4.5 among men over age 30?
 
-#Women
-ratingWomendf = mediandf[(mediandf['rating']>4.5)&(mediandf['gender']=='F')&(mediandf['age']>30)]
-print "\n Movies with median rating over 4.5 rated by Women"
-print ratingWomendf.sort(['rating'], ascending=[0])
-        
-#What are ten most popular movies? we gonna count the number of rating by users because the more rating times there are,
-#the more concentration the movie has which can serve to prove this movie is very popular
-print "\n most rated:"
-ratings_by_title = data.groupby('title').size()
-ratings_by_title.sort(ascending=False)
-#print ratings_by_title[:10]
+# Filter by age > 25 as age 30 can fall within the age group range 25-34 
+filtered=data[(data['age']>25)]
+# Calculate the median across gender
+median_ratings = filtered.pivot_table( values='rating', rows='title', cols=['gender'], aggfunc='median')
+men_med_ratings = median_ratings[(median_ratings.M>4.5)].sort_index(by='M', ascending=False)
 
-#these are the movies with the highest number of ratings. but are they rated high? let's say among the top 100 movies by rating, the most popular are the 10 with the highest average rating
+print "\n Number of movies with average rating over 4.5 among women over age 30 are " + str(len(men_med_ratings.index))
+# Displaying the top 10 values only
+men_med_ratings[:10]
 
-most_rated2 = ratings_by_title.head(n=100)
-most_rated2 = most_rated2.index
-high_pop=mean_ratings[most_rated2]
-high_pop.sort(ascending=False)
-print high_pop[:10]
+# How many movies have an median rating over 4.5 among women over age 30?
+
+# Get the median ratings for Female
+women_med_ratings = median_ratings[(median_ratings.F>4.5)].sort_index(by='F', ascending=False)
+
+print "\n Number of movies with average rating over 4.5 among women over age 30 are " + str(len(women_med_ratings.index))
+# Displaying the top 10 values only
+women_med_ratings[:10]
+
+# What are the ten most popular movies?
+
+# Popular movies are considered to be those that have more reviews and high rating > 4.5 between both the genders irrespective 
+# of the age group
+
+# look for movies that are highly rated
+# Get the mean ratings of those highly rated movies by gender
+ratings_by_title = data.groupby('title').size().order(ascending=False)
+mean_ratings = mean_ratings.ix[ratings_by_title.index]
+# Relaxing the mean rating to 4.4 as there are fewer records for 4.5
+df=mean_ratings[(mean_ratings.F>4.4)&(mean_ratings.M>4.4)]
+top_ratings = df.sort_index(by=['F','M'], ascending=False)
+top_ratings 
+
+# Make some conjectures about how easy various groups are to please? Support your answers with data!
+# For example, one might conjecture that people between the ages of 1 and 10 are the easiest to please since they are all young children. This conjecture may or may not be true, but how would you support or disprove either conclusion with with data?
+# Be sure to come up with your own conjectures and support them with data!
+
+print "Conjecture 1: Men prefer Action movies over Drama"
+# Total number of pure action movies in the dataset
+action=data[(data['genres']=='Action')]
+action_ratings= action.pivot_table('rating', rows=['title'], cols='genres', aggfunc='mean').sort_index(by='Action', ascending=False)
+# Filter the data by male
+menact_data=data[(data.gender=='M')&(data.genres=='Action')]
+act_ratings= menact_data.pivot_table('rating', rows=['title'], cols='genres', aggfunc='mean').sort_index(by=['Action'], ascending=False)
+print "Total number of Action movies that received reviews from men are " + str(act_ratings.index.size) +" out of " + str(action_ratings.index.size)
+# Received a good review above 4
+act_ratings =act_ratings[act_ratings.Action>4]
+print str(act_ratings.index.size) + " received rating greater than 4"
+
+# Total number of pure Drama movies in the dataset
+drama=data[(data['genres']=='Drama')]
+drama_ratings= drama.pivot_table('rating', rows=['title'], cols='genres', aggfunc='mean').sort_index(by='Drama', ascending=False)
+# Filter the data by male
+mendrm_data=data[(data.gender=='M')&(data.genres=='Drama')]
+drm_ratings= mendrm_data.pivot_table('rating', rows=['title'], cols='genres', aggfunc='mean').sort_index(by=['Drama'], ascending=False)
+print "Total number of Drama movies that received reviews from men are " + str(drm_ratings.index.size) +" out of " + str(drama_ratings.index.size)
+# Received a good review above 4
+drm_ratings =drm_ratings[drm_ratings.Drama>4]
+print str(drm_ratings.index.size) + " received rating greater than 4"
+
+# Conclusion:
+# Since reviews for both Action and Drama are about the same, our conjecture is false. From the data, we can infer that Men equally like
+# Action and Drama genre movies. The conjecture can be tested more accurately if the ratio of Action and Drama is approx. equal to 1. 
+# As in, there should be more action movies produced.
+
+print "\n"
+print "Conjecture 2: Drama is preferred by middle aged people(35-45) against Romance"
+# Filter by age and genre
+middle_age_drm=data[(data.age>=35)&(data.age<=45)&(data['genres']=='Drama')]
+mid_drama_ratings= middle_age_drm.pivot_table('rating', rows=['title'], cols='genres', aggfunc='mean').sort_index(by='Drama', ascending=False)
+print "Total number of Drama movies that received reviews from middle aged people are " + str(mid_drama_ratings.index.size) +" out of " + str(drama_ratings.index.size)
+# Received a good review above 4
+mid_drama_ratings =mid_drama_ratings[mid_drama_ratings.Drama>4]
+print str(mid_drama_ratings.index.size) + " received rating greater than 4"
 
 #conjecture: look at most popular genres among different age groups 
 
