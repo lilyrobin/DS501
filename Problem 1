@@ -6,17 +6,17 @@ import numpy as np
 
 # Users information from Users.dat file
 unames = ['user_id', 'gender', 'age', 'occupation', 'zip'] 
-users = pd.read_table('C:/iPython/users.dat', sep='::', header=None,
+users = pd.read_table('your_file_path_here', sep='::', header=None,
                       names=unames)
 
 # Rating information from Ratings.dat file
 rnames = ['user_id', 'movie_id', 'rating', 'timestamp']
-ratings = pd.read_table('C:/iPython/ratings.dat', sep='::', header=None,
+ratings = pd.read_table('your_file_path_here', sep='::', header=None,
                         names=rnames)
 
 # Movies information from Movies.dat file
 mnames = ['movie_id', 'title', 'genres']
-movies = pd.read_table('C:/iPython/movies.dat', sep='::', header=None,
+movies = pd.read_table('your_file_path_here', sep='::', header=None,
                         names=mnames)
 
 # We first merge ratings with users then merging that result with the movies data. 
@@ -26,6 +26,12 @@ data = pd.merge(pd.merge(ratings, users), movies)
 
 # Store the data into an HDF5[hierarchical data format] file
 store = pd.HDFStore('data.h5')
+
+meandf= data.groupby(['title'], as_index=False).aggregate({'rating':np.mean})
+ratingdf = meandf[meandf['rating']>4.5]
+print "\n Movies with average rating over 4.5"
+print len(ratingdf.sort(['rating'], ascending=[0]))
+print ratingdf.sort(['rating'], ascending=[0])
 
 # How many movies have an average rating over 4.5 among men? How about women?
 # Group by Title, Gender
@@ -64,6 +70,24 @@ print "\n Number of movies with average rating over 4.5 among women over age 30 
 women_med_ratings[:10]
 
 # What are the ten most popular movies?
+
+#we looked at it two ways, then compared. 
+
+#What are ten most popular movies? we gcount the number of rating by users because the more rating times there are,
+#the more concentration the movie has which can serve to prove this movie is very popular
+#print "\n most rated:"
+ratings_by_title = data.groupby('title').size()
+ratings_by_title.sort(ascending=False)
+#print ratings_by_title[:10]
+
+#these are the movies with the highest number of ratings. but are they rated high? let's say among the top 100 movies by rating, the most popular are the 10 with the highest average rating
+
+most_rated2 = ratings_by_title.head(n=100)
+most_rated2 = most_rated2.index
+high_pop=mean_ratings[most_rated2]
+high_pop.sort(ascending=False)
+print "\n highest rated:"
+print high_pop[:10]
 
 # Popular movies are considered to be those that have more reviews and high rating > 4.5 between both the genders irrespective 
 # of the age group
