@@ -1,23 +1,29 @@
 #Do any of your conjectures in Problems 1, 2, and 3 provide insights that a movie company might be interested in?
-#A: 
+#A: there are absolutely many conjectures in our 3 problems which may interest the movie company. for example, in #problem1, we have a conjecture that is  which is the most common movie style among middle aged people(40-60). The #conjecture can help a movie company efficiently recommend people movies. I will discuss about this question below in #detail. 
 
 
 #Propose a business question that you think this data can answer?
-#How the company can efficiently recommend people movies?
+#Business Question: How does a movie company can efficiently recommend people movies?
 
-#A: Now there exist an hot issue that how a movie company can efficient recommend people movies. Although it sounds easy
-#to be solved with the help of data, how to effiently do a recommendation is very complicated. From the marketing 
-#perspective, there are a few questions below need to be answered.
-#1. How to recommend people at different age movies? what kinds of movies are popular in different age groups?
-#In order to answer the first question, we will look at the data which shows us the popular genre of movie among different
-age groups. From the data we collected in Problem 1, we can definitely know that Comedy is very popular among kids and
-teenagers. For people whose age is between 20-40, Comedy and Dramma are both welcomed. When people is older than 40, they
-prefer to focusing on Dramma. To improve our analysis, I think we can divide people into more groups so that we can better
-predict people's preference of movie geners. In addition, we already know dramma and comedy are poplar in people's view.
-Now we start to deeply analyze top 10 movies in dramma and commedy. with the help of the data ....
+#A: Now there exist an hot issue that how does a movie company can recommend people movies. Although it sounds easy #to be solved with the help of data, how to efficiently do a recommendation is very complicated. From the marketing #perspective, we think the data we collected can help the movie company finish this task. 
+#  Firstly, there is a fact that people at different age must have the different preference of movies. In order to #answer the question, we will look at the data which shows us the popular genre of movie among different age groups. #From the data we collected in Problem 1, we can definitely know that Comedy is very popular among kids and teenagers#. For people whose age is between 20-40, Comedy and Drama are both welcomed. When people is older than 40, they #prefer to focusing on Drama. To improve our analysis, I think we can divide people into more groups so that we can #better predict people's preference of movie genres.
+#  In addition, we already know Drama and comedy are popular in people's view. In addition we start to deeply analyze #top 10 movies in different genres. With the help of the data we collected, we can predict which movie that belongs #to Drama or Comedy maybe attractive  for people of a certain age. 
+#  Moreover we also analyze and distinguish the preference of movies between men and women so that we can optimize #our prediction model. For example, when the movie company has a male user whose name is Stefan at age of over 30, #according to our prediction model, the movie company may receive a positive feedback from him due to 
+#recommending the movies “Angela(1995)” and “Smashing Time(1967)”. 
+#  Last but not least, if we still analyze the place where most active users might live, we could better optimize our #prediction model and help our marketing team revise their marketing strategies. For example: 
+
 #where are our most active users? look at zip code
 
 #print data.head(10)
 x=data.pivot_table('rating', rows='zip', aggfunc='count')
 y=x
 y.order(ascending=False).head(10) #most active zip codes, want to market to these people (note does NOT control for population in that zip code)
+
+#From the result printed out, we can know the place where most active users live. So the most active place maybe San #Francisco, Chicago, Seattle, etc. but it cannot stand for the popularity in that area because we still don’t know #the population in that area.  Even so, this important information cannot be ignored by our marketing team. The movie #company may put more money in these areas via deep analysis of market. 
+
+
+#Suppose you are a Data Sciencetist at a movie company. Convince your boss that your conjecture is correct!
+# Conjecture: the most popular genre of movie among middle aged people is Drama. 
+# 1. Display the result we collected as table formate to Boss: If we display the result to the boss, he/she will see #what kinds of movie lists on the top place directly. 
+# 2: Tell the boss our methods of Analysis , how do we get such a result and make this conjecture: 
+#  3: Tell the boss the profit that the company can get if this conjecture is correct and accepted. 
