@@ -87,12 +87,12 @@ ratings_by_title = data.groupby('title').size().order(ascending=False)
 # These are the movies with the highest number of ratings. but are they rated high? 
 # let's say among the top 100 movies by rating, the most popular are the 10 with the highest average rating
 
-# most_rated2 = ratings_by_title.head(n=100)
-# most_rated2 = most_rated2.index
-high_ratings = high_ratings.ix[ratings_by_title.index[:100]]
-high_ratings.order(ascending=False)
-print "Highest rated:"
-print high_ratings[:10]
+most_rated2 = ratings_by_title.head(n=100)
+most_rated2 = most_rated2.index
+high_pop=mean_ratings[most_rated2]
+high_pop.sort(ascending=False)
+print "\n highest rated:"
+print high_pop[:10]
 
 # Popular movies are considered to be those that have more reviews and high rating > 4.5 between both the genders irrespective 
 # of the age group
